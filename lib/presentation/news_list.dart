@@ -8,7 +8,11 @@ class NewsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(
+          elevation: 1,
+          title: Text("News API"),
+          centerTitle: false,
+        ),
         body: FutureBuilder<List<ArticleResponse>>(
           future: NewsController().fetchNews(),
           builder: (context, snapshot) {
@@ -26,6 +30,7 @@ class NewsList extends StatelessWidget {
                       leading: news!.urlToImage.isNotEmpty
                           ? Image.network(
                               news.urlToImage,
+                              fit: BoxFit.fill,
                             )
                           : Text('No Image'),
                       title: Text(news.title),
