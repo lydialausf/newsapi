@@ -8,9 +8,9 @@ Run **flutter run -d chrome --web-renderer html** for the image to display prope
 
 # Web
 
-<img width="1440" alt="Screenshot 2024-12-28 at 8 36 24 PM" src="https://github.com/user-attachments/assets/34468b77-f176-4c2d-a1a7-7ff23c7e73c6" />
+<img height = "300" width="300" alt="Screenshot 2024-12-28 at 8 36 24 PM" src="https://github.com/user-attachments/assets/34468b77-f176-4c2d-a1a7-7ff23c7e73c6" />
 
-<img width="1440" alt="Screenshot 2024-12-28 at 9 05 09 PM" src="https://github.com/user-attachments/assets/8fb5b31e-f8af-4f28-aace-5d3a768c3aeb" />
+<img height = "300" width="300" alt="Screenshot 2024-12-28 at 9 05 09 PM" src="https://github.com/user-attachments/assets/8fb5b31e-f8af-4f28-aace-5d3a768c3aeb" />
 
 # iOS
 
