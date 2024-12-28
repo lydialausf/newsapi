@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:news_api/controller/controller.dart';
 import 'package:news_api/model/model.dart';
+import 'package:news_api/presentation/presentation.dart';
 
 class NewsList extends StatelessWidget {
   const NewsList({super.key});
@@ -40,13 +41,14 @@ class NewsList extends StatelessWidget {
                 itemBuilder: (context, index) {
                   final news = newsList[index];
                   return ListTile(
-                    leading: news.urlToImage.isNotEmpty
-                        ? Image.network(
-                            news.urlToImage,
-                          )
-                        : Text('No Image'),
+                    onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => PreviewNews(
+                                  news: news,
+                                ))),
+                    trailing: Icon(Icons.arrow_forward_outlined),
                     title: Text(news.title),
-                    subtitle: Text(news.description),
                   );
                 },
                 separatorBuilder: (context, index) => Divider(),
