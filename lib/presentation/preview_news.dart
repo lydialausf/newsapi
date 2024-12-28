@@ -23,24 +23,18 @@ class _PreviewNewsState extends State<PreviewNews> {
         body: SingleChildScrollView(
             child: Column(
           children: [
-            widget.news.urlToImage.isNotEmpty
-                ? SizedBox(
-                    width: double.infinity,
-                    height: 400,
-                    child: DecoratedBox(
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: NetworkImage(widget.news.urlToImage),
-                            fit: BoxFit.cover),
-                      ),
-                    ))
-                : SizedBox(
-                    width: double.infinity,
-                    height: 400,
-                    child: Text(
-                      'No Image',
-                      textAlign: TextAlign.center,
-                    )),
+            SizedBox(
+                width: double.infinity,
+                height: 400,
+                child: widget.news.urlToImage == "Unable to retrieve image"
+                    ? Image.asset("assets/images/image_load_fail.png")
+                    : DecoratedBox(
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: NetworkImage(widget.news.urlToImage),
+                              fit: BoxFit.cover),
+                        ),
+                      )),
             Wrap(
               children: [
                 Padding(
@@ -65,6 +59,9 @@ class _PreviewNewsState extends State<PreviewNews> {
                   ),
                 ),
               ],
+            ),
+            SizedBox(
+              height: 50,
             )
           ],
         )));

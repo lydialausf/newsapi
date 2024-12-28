@@ -1,0 +1,1 @@
+ /Users/sir.l/Desktop/My\ Projects/newsapi/.dart_tool/flutter_build/5b469a5b6a8530c0157680c054ddce8e/native_assets.yaml: 
