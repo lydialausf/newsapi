@@ -17,26 +17,40 @@ class NewsList extends StatelessWidget {
           future: NewsController().fetchNews(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(child: CircularProgressIndicator());
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CircularProgressIndicator(),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      'Fetching...',
+                    )
+                  ],
+                ),
+              );
             } else if (snapshot.hasError) {
               return Center(child: Text('Error: ${snapshot.error}'));
             } else {
               final newsList = snapshot.data;
-              return ListView.builder(
-                  itemCount: newsList?.length,
-                  itemBuilder: (context, index) {
-                    final news = newsList?[index];
-                    return ListTile(
-                      leading: news!.urlToImage.isNotEmpty
-                          ? Image.network(
-                              news.urlToImage,
-                              fit: BoxFit.fill,
-                            )
-                          : Text('No Image'),
-                      title: Text(news.title),
-                      subtitle: Text(news.description),
-                    );
-                  });
+              return ListView.separated(
+                itemCount: newsList!.length,
+                itemBuilder: (context, index) {
+                  final news = newsList[index];
+                  return ListTile(
+                    leading: news.urlToImage.isNotEmpty
+                        ? Image.network(
+                            news.urlToImage,
+                          )
+                        : Text('No Image'),
+                    title: Text(news.title),
+                    subtitle: Text(news.description),
+                  );
+                },
+                separatorBuilder: (context, index) => Divider(),
+              );
             }
           },
         ));
