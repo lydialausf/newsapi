@@ -1,5 +1,3 @@
-# news_api
-
 # Fetching news using API from NewsAPI
 
 Unable to host the app on Vercel as the NewsAPI require a paid plan to deploy into production.
