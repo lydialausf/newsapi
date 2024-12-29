@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:news_api/controller/controller.dart';
-import 'package:news_api/model/model.dart';
 import 'package:news_api/presentation/presentation.dart';
 
 class NewsList extends StatelessWidget {
-  const NewsList({super.key});
+  NewsList({super.key});
+
+  final List<String> headlineList = [
+    "All articles mentioning Apple from yesterday, sorted by popular publishers first",
+    "All articles about Tesla from the last month, sorted by recent first",
+    "Top business headlines in the US right now",
+    "Top headlines from TechCrunch right now",
+    "All articles published by the Wall Street Journal in the last 6 months, sorted by recent first",
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -14,47 +20,64 @@ class NewsList extends StatelessWidget {
           title: Text("News API"),
           centerTitle: false,
         ),
-        body: FutureBuilder<List<ArticleResponse>>(
-          future: NewsController().fetchNews(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CircularProgressIndicator(),
-                    SizedBox(
-                      height: 10,
+        body: GridView.count(
+            crossAxisSpacing: 20,
+            mainAxisSpacing: 30,
+            crossAxisCount: 2,
+            children: [
+              for (var headline in headlineList)
+                GestureDetector(
+                  onTap: () {
+                    for (var i = 0; i < headlineList.length; i++) {
+                      if (headline == headlineList[i]) {
+                        switch (i) {
+                          case 0:
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => AppleArticleList()));
+                            break;
+                          case 1:
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => TeslaArticleList()));
+                            break;
+                          case 2:
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => TopHeadlineList()));
+                            break;
+                          case 3:
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => TechCrunchList()));
+                            break;
+                          case 4:
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        WallStreetArticleList()));
+                            break;
+                        }
+                      }
+                    }
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Card(
+                      child: Center(
+                        child: Text(
+                          headline,
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
                     ),
-                    Text(
-                      'Fetching...',
-                    )
-                  ],
-                ),
-              );
-            } else if (snapshot.hasError) {
-              return Center(child: Text('Error: ${snapshot.error}'));
-            } else {
-              final newsList = snapshot.data;
-              return ListView.separated(
-                itemCount: newsList!.length,
-                itemBuilder: (context, index) {
-                  final news = newsList[index];
-                  return ListTile(
-                    onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => PreviewNews(
-                                  news: news,
-                                ))),
-                    trailing: Icon(Icons.arrow_forward_outlined),
-                    title: Text(news.title),
-                  );
-                },
-                separatorBuilder: (context, index) => Divider(),
-              );
-            }
-          },
-        ));
+                  ),
+                )
+            ]));
   }
 }
