@@ -5,11 +5,11 @@ class NewsList extends StatelessWidget {
   NewsList({super.key});
 
   final List<String> headlineList = [
-    "All articles mentioning Apple from yesterday, sorted by popular publishers first",
-    "All articles about Tesla from the last month, sorted by recent first",
+    "All articles mentioning Apple from yesterday",
+    "All articles about Tesla from the last month",
     "Top business headlines in the US right now",
     "Top headlines from TechCrunch right now",
-    "All articles published by the Wall Street Journal in the last 6 months, sorted by recent first",
+    "All articles published by the Wall Street Journal in the last 6 months",
   ];
 
   @override
