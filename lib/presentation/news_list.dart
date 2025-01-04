@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news_api/presentation/presentation.dart';
+import 'package:news_api/global/global.dart';
 
 class NewsList extends StatelessWidget {
   NewsList({super.key});
@@ -14,6 +15,8 @@ class NewsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isScreenLarge = context.isScreenLarge;
+    final isScreenMedium = context.isScreenMedium;
     return Scaffold(
         appBar: AppBar(
           elevation: 1,
@@ -24,6 +27,11 @@ class NewsList extends StatelessWidget {
             crossAxisSpacing: 20,
             mainAxisSpacing: 30,
             crossAxisCount: 2,
+            padding: isScreenLarge
+                ? EdgeInsets.symmetric(horizontal: 500, vertical: 50)
+                : isScreenMedium
+                    ? EdgeInsets.symmetric(horizontal: 200, vertical: 50)
+                    : null,
             children: [
               for (var headline in headlineList)
                 GestureDetector(
